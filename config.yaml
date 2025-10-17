@@ -155,15 +155,14 @@ pcbs:
       - where: matrix_far_home
         what: ceoloide/battery_connector_jst_ph_2
         adjust:
-          # TODO: Place properly
-          shift: [cx, -cy]
+          shift: [1.5cx, -1.7cy]
+          rotate: 180
         params:
           reversible: true
       # Power switch
       - where: matrix_far_home
         what: ceoloide/power_switch_smd_side
         adjust:
-          # TODO: Place properly
           shift: [2cx-0.8, -1.3cy]
         params:
           reversible: true
