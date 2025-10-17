@@ -148,7 +148,7 @@ pcbs:
       - where: matrix_far_home
         what: ceoloide/battery_connector_jst_ph_2
         adjust:
-          shift: [1.5cx, -1.7cy]
+          shift: [1.3cx, -1.8cy]
           rotate: 180
         params:
           reversible: true
