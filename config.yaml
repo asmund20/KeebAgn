@@ -1,0 +1,196 @@
+meta:
+  engine: 4.1.0
+units:
+points:
+  key:
+    padding: cy
+    bind: 1
+
+  zones:
+    matrix:
+      anchor:
+        shift: [100,-100]
+      rows:
+        bottom:
+          key:
+            row_net: P10
+        home:
+          key:
+            row_net: P3
+        top:
+          key:
+            row_net: P1
+      columns:
+        outer:
+          key:
+            column_net: P7
+        pinkie:
+          key:
+            tags: pinkie
+            column_net: P2
+            spread: cx
+        ring:
+          key:
+            tags: ring
+            column_net: P5
+            stagger: 0.5cy
+            spread: cx+1.5
+            splay: -4
+        middle:
+          key:
+            tags: middle
+            column_net: P6
+            stagger: 0.5cy
+            spread: cx+1.5
+            splay: -4
+        index:
+          key:
+            column_net: P8
+            spread: cx+1.5
+            stagger: -0.5cy
+            splay: -4
+        far:
+          key:
+            column_net: P9
+            spread: cx
+    thumb:
+
+      anchor:
+        ref: matrix_index_bottom
+        shift: [0, -cy]
+      rows:
+        row:
+          key:
+            row_net: P11
+      columns:
+        outer:
+          key:
+            column_net: P6
+        central:
+          key:
+            column_net: P8
+            spread: cx+4
+            rotate: -15
+            stagger: -4
+        far:
+          key:
+            column_net: P9
+            spread: cx+2
+            rotate: -25
+            stagger: -8
+
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [cx+2,cy+2]
+    - what: rectangle
+      where: [
+                matrix_pinkie_top,
+                matrix_pinkie_home,
+                matrix_middle_home,
+              ]
+      size: [1.5cx, cy+2]
+    - what: rectangle
+      where: matrix_ring_top
+      size: [cx, cy+2]
+      adjust:
+        shift:
+          [0.5cx, 0]
+    - what: rectangle
+      where: matrix_middle_home
+      size: [10, 2cy+3.5]
+      adjust:
+        rotate: -4
+        shift: [0.5cx,0]
+    - what: rectangle
+      where: matrix_middle_bottom
+      size: [1.5cx, cy+2]
+    - what: rectangle
+      where: matrix_far_home
+      size: [3cx-4,4.9cy+2]
+      adjust:
+        shift: [0.75cx-1.5, -cy+0.8]
+    - what: rectangle
+      where: matrix_far_bottom
+      size: [2cx,cy]
+      operation: subtract
+      adjust:
+        shift: [0, -2.4cy+0.27]
+        rotate: -20
+  cutout:
+    - what: outline
+      name: raw
+      fillet: 1
+  keycap_outlines:
+    - what: rectangle
+      where: true
+      size: [cx-0.5, cy-0.5]
+  preview:
+    - what: outline
+      name: cutout
+    - what: outline
+      name: keycap_outlines
+      operation: subtract
+
+
+      
+pcbs:
+  pcb:
+    template: kicad8
+    outlines:
+      - outline: cutout
+    footprints:
+      # Nice nano
+      - where: matrix_far_home
+        what: ceoloide/mcu_nice_nano
+        adjust:
+          shift: [cx+5, 8.3]
+        params:
+          reversible: true
+      # Battery
+      - where: matrix_far_home
+        what: ceoloide/battery_connector_jst_ph_2
+        adjust:
+          # TODO: Place properly
+          shift: [cx, -cy]
+        params:
+          reversible: true
+      # Power switch
+      - where: matrix_far_home
+        what: ceoloide/power_switch_smd_side
+        adjust:
+          # TODO: Place properly
+          shift: [2cx-0.8, -1.3cy]
+        params:
+          reversible: true
+          from: pos
+          to: RAW
+      # Reset button
+      - where: matrix_far_home
+        what: ceoloide/reset_switch_smd_side
+        adjust: 
+          shift: [2cx-0.8, -2cy]
+          rotate: -90
+        params:
+          from: GND
+          to: RST
+      # Diodes
+      - where: true
+        what: ceoloide/diode_tht_sod123
+        params:
+          from: =colrow
+          to: =row_net
+        adjust:
+          shift: [0,-5]
+      # Switches
+      - where: true
+        what: ceoloide/switch_choc_v1_v2
+        params:
+          from: =column_net
+          to: =colrow
+          reversible: true
+          include_corner_marks: true
+          choc_v1_support: false
+
+cases:
