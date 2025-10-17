@@ -1,4 +1,4 @@
-# Keyboard again
+# KeebAgn (KeebAgain)
 I am making a new split keyboard! Based on the [last one I made](github.com/asmund20/keyboard_journey).
 
 ## This is a work in progress, do not assume that it works
