@@ -114,13 +114,6 @@ outlines:
       size: [3cx-4,4.9cy+2]
       adjust:
         shift: [0.75cx-1.5, -cy+0.8]
-    - what: rectangle
-      where: matrix_far_bottom
-      size: [2cx,cy]
-      operation: subtract
-      adjust:
-        shift: [0, -2.4cy+0.27]
-        rotate: -20
   cutout:
     - what: outline
       name: raw
