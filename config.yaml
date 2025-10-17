@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Åsmund Olai Sand-Larsen
+# SPDX-License-Identifier: MIT
+# To view a copy of this license, visit https://opensource.org/license/mit/
 meta:
   engine: 4.1.0
 units:
