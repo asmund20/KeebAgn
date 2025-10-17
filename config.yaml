@@ -158,18 +158,18 @@ pcbs:
         adjust:
           shift: [2cx-0.8, -1.3cy]
         params:
-          reversible: true
           from: pos
           to: RAW
       # Reset button
       - where: matrix_far_home
-        what: ceoloide/reset_switch_smd_side
-        adjust: 
+        what: SW_B3U-1000P
+        adjust:
           shift: [2cx-0.8, -2cy]
           rotate: -90
         params:
-          from: GND
-          to: RST
+          P1: GND
+          P2: RST
+          reversible: true
       # Diodes
       - where: true
         what: ceoloide/diode_tht_sod123
