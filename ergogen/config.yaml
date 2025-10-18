@@ -1,9 +1,16 @@
 # Copyright (c) 2025 Åsmund Olai Sand-Larsen
 # SPDX-License-Identifier: MIT
 # To view a copy of this license, visit https://opensource.org/license/mit/
+
+# TODO:
+  # Add vias for connecting the battery connector nets
+  # Add screw holes
+
 meta:
   engine: 4.1.0
 units:
+  d: 2
+  d2: 6
 points:
   key:
     padding: cy
@@ -83,65 +90,131 @@ points:
             stagger: -8
 
 outlines:
-  raw:
-    - what: rectangle
-      where: true
-      size: [cx+2,cy+2]
-    - what: rectangle
-      where: [
-                matrix_pinkie_top,
-                matrix_pinkie_home,
-                matrix_middle_home,
-              ]
-      size: [1.5cx, cy+2]
-    - what: rectangle
-      where: matrix_ring_top
-      size: [cx, cy+2]
-      adjust:
-        shift:
-          [0.5cx, 0]
-    - what: rectangle
-      where: matrix_middle_home
-      size: [10, 2cy+3.5]
-      adjust:
-        rotate: -4
-        shift: [0.5cx,0]
-    - what: rectangle
-      where: matrix_middle_bottom
-      size: [1.5cx, cy+2]
-    - what: rectangle
-      where: matrix_far_home
-      size: [3cx-4,4.9cy+2]
-      adjust:
-        shift: [0.75cx-1.5, -cy+0.8]
-  cutout:
+  _raw:
+    - what: polygon
+      points:
+        - ref: matrix_outer_top
+          shift: [-0.5cx-d, 0.5cy+d]
+        - ref: matrix_pinkie_top
+          shift: [0.5cx+d, 0.5cy+d]
+        - ref: matrix_ring_top
+          shift: [-0.5cx-d, 0.5cy+d]
+        - ref: matrix_ring_top
+          shift: [0.5cx+d, 0.5cy+d]
+        - ref: matrix_middle_top
+          shift: [-0.5cx-d, 0.5cy+d]
+        - ref: matrix_middle_top
+          shift: [0.5cx+d, 0.5cy+d]
+        - ref: matrix_middle_top
+          shift: [0.5cx+d, 1.25d]
+        - ref: matrix_far_top
+          shift: [2cx+1.25d, 0.5cy+d]
+        - ref: thumb_far_row
+          shift: [0.5cx+d, 0.5cy+d]
+        - ref: thumb_far_row
+          shift: [0.5cx+d, -0.5cy-d]
+        - ref: thumb_outer_row
+          shift: [-0.5cx-d, -0.5cy-d]
+        - ref: matrix_middle_bottom
+          shift: [0.5cx-d, -0.5cy-d]
+        - ref: matrix_middle_bottom
+          shift: [-0.5cx+d, -0.5cy-d]
+        - ref: matrix_ring_bottom
+          shift: [0.5cx+d, -0.5cy-d]
+        - ref: matrix_ring_bottom
+          shift: [-0.5cx+d, -0.5cy-d]
+        - ref: matrix_pinkie_bottom
+          shift: [0.5cx+d, -0.5cy-d]
+        - ref: matrix_outer_bottom
+          shift: [-0.5cx-d, -0.5cy-d]
+  
+  outer_raw:
+    - what: polygon
+      points:
+        - ref: matrix_outer_top
+          shift: [-0.5cx-d2, 0.5cy+d2]
+        - ref: matrix_pinkie_top
+          shift: [0.5cx-d, 0.5cy+d2]
+        - ref: matrix_ring_top
+          shift: [-0.5cx-d2, 0.5cy+d2]
+        - ref: matrix_ring_top
+          shift: [0.5cx-d, 0.5cy+d2]
+        - ref: matrix_middle_top
+          shift: [-0.5cx-d2, 0.5cy+d2]
+        - ref: matrix_middle_top
+          shift: [0.5cx+d2, 0.5cy+d2]
+        - ref: matrix_middle_top
+          shift: [0.5cx+d2, 1.25d2]
+        - ref: matrix_far_top
+          shift: [2cx+1.25d2, 0.5cy+d2]
+        - ref: thumb_far_row
+          shift: [0.5cx+1.25d2, 0.5cy+d]
+        - ref: thumb_far_row
+          shift: [0.5cx+d2, -0.5cy-d2]
+        - ref: thumb_outer_row
+          shift: [-0.5cx-d2, -0.5cy-d2]
+        - ref: matrix_middle_bottom
+          shift: [0.5cx-d2, -0.5cy-d2]
+        - ref: matrix_middle_bottom
+          shift: [-0.5cx+d2, -0.5cy-d2]
+        - ref: matrix_ring_bottom
+          shift: [0.5cx+d2, -0.5cy-d2]
+        - ref: matrix_ring_bottom
+          shift: [-0.5cx+d2, -0.5cy-d2]
+        - ref: matrix_pinkie_bottom
+          shift: [0.5cx+d2, -0.5cy-d2]
+        - ref: matrix_outer_bottom
+          shift: [-0.5cx-d2, -0.5cy-d2]
+  _cutout:
     - what: outline
-      name: raw
+      name: _raw
       fillet: 1
-  keycap_outlines:
+  _outer:
+    - what: outline
+      name: outer_raw
+      fillet: 1
+  _keycap_outlines:
     - what: rectangle
       where: true
       size: [cx-0.5, cy-0.5]
   preview:
     - what: outline
-      name: cutout
+      name: _cutout
     - what: outline
-      name: keycap_outlines
+      name: _keycap_outlines
+      operation: subtract
+  plate:
+    - what: outline
+      name: preview
+    - what: polygon
+      points:
+        - ref: matrix_far_top
+          shift: [0.5cx+2d, 0.5cy+d]
+        - ref: matrix_far_top
+          shift: [2.5cx, 0.5cy+d]
+        - ref: matrix_far_bottom
+          shift: [2.5cx, -0.75cy-d]
+        - ref: matrix_far_bottom
+          shift: [0.5cx+2d, -0.5cy]
+      operation: subtract
+  case:
+    - what: outline
+      name: _outer
+    - what: outline
+      name: _raw
       operation: subtract
 
-
-      
 pcbs:
   pcb:
     template: kicad8
     outlines:
-      - outline: cutout
+      - outline: _cutout
     footprints:
       # Nice nano
       - where: matrix_far_home
         what: ceoloide/mcu_nice_nano
         adjust:
-          shift: [cx+5, 8.3]
+          shift: [cx+6, 8.3]
         params:
           reversible: true
       # Battery
@@ -156,7 +229,7 @@ pcbs:
       - where: matrix_far_home
         what: ceoloide/power_switch_smd_side
         adjust:
-          shift: [2cx-0.8, -1.3cy]
+          shift: [2cx+0.8, -1.3cy]
         params:
           from: pos
           to: RAW
@@ -164,7 +237,7 @@ pcbs:
       - where: matrix_far_home
         what: SW_B3U-1000P
         adjust:
-          shift: [2cx-0.8, -2cy]
+          shift: [2cx+0.7, -2cy]
           rotate: -90
         params:
           P1: GND
@@ -189,3 +262,28 @@ pcbs:
           choc_v1_support: false
 
 cases:
+  plate:
+    - what: outline
+      name: plate
+      extrude: 3
+
+  wall:
+    - what: outline
+      name: case
+      extrude: 15
+  bottom:
+    - what: outline
+      name: _cutout
+      extrude: 3
+  upper:
+    - what: case
+      name: plate
+      shift: [0,0,10]
+    - what: case
+      name: wall
+  case:
+    - what: case
+      name: upper
+    - what: case
+      name: bottom
+      
