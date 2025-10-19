@@ -21,6 +21,7 @@ points:
     matrix:
       anchor:
         shift: [100,-100]
+        rotate: 8
       rows:
         bottom:
           key:
@@ -65,14 +66,10 @@ points:
             column_net: P9
             spread: cx
     thumb:
-
       anchor:
         ref: matrix_index_bottom
         shift: [0, -cy]
-      rows:
-        row:
-          key:
-            row_net: P11
+      rows.default.key.row_net: P11
       columns:
         outer:
           key:
@@ -89,14 +86,37 @@ points:
             spread: cx+2
             rotate: -25
             stagger: -8
-
+      
 outlines:
   _screw_outline:
     - what: circle
-      radius: 4
-    - what: circle
-      radius: 2
-      operation: subtract
+      radius: 1
+  screws:
+    - what: outline
+      name: _screw_outline
+      where: matrix_pinkie_top
+      adjust.shift: [0.5cx+2, 0]
+    - what: outline
+      name: _screw_outline
+      where: matrix_pinkie_home
+      adjust.shift: [0.5cx+0.75, 0]
+    - what: outline
+      name: _screw_outline
+      where: matrix_middle_home
+      adjust.shift: [0.5cx+2, 0]
+    - what: outline
+      name: _screw_outline
+      where: matrix_middle_bottom
+      adjust.shift: [0.5cx+0.75, 0]
+    - what: outline
+      name: _screw_outline
+      where: thumb_central
+      adjust.shift: [0.5cx+1.5, 0]
+  _reset_hole:
+    - what: outline
+      name: _screw_outline
+      where: matrix_far_home
+      adjust.shift: [2cx-4, -cy-9]
   _raw:
     - what: polygon
       points:
@@ -116,16 +136,14 @@ outlines:
           shift: [0.5cx+d, 1.25d]
         - ref: matrix_far_top
           shift: [2cx+1.25d, 0.5cy+d]
-        - ref: thumb_far_row
+        - ref: thumb_far
           shift: [0.5cx+d, 0.5cy+d]
-        - ref: thumb_far_row
+        - ref: thumb_far
           shift: [0.5cx+d, -0.5cy-d]
-        - ref: thumb_outer_row
+        - ref: thumb_outer
           shift: [-0.5cx-d, -0.5cy-d]
-        - ref: matrix_middle_bottom
-          shift: [0.5cx-d, -0.5cy-d]
-        - ref: matrix_middle_bottom
-          shift: [-0.5cx+d, -0.5cy-d]
+        - ref: matrix_index_bottom
+          shift: [-0.5cx-d, -0.5cy-d]
         - ref: matrix_ring_bottom
           shift: [0.5cx+d, -0.5cy-d]
         - ref: matrix_ring_bottom
@@ -153,16 +171,14 @@ outlines:
           shift: [0.5cx+d2, 1.25d2]
         - ref: matrix_far_top
           shift: [2cx+1.25d2, 0.5cy+d2]
-        - ref: thumb_far_row
+        - ref: thumb_far
           shift: [0.5cx+1.25d2, 0.5cy+d]
-        - ref: thumb_far_row
+        - ref: thumb_far
           shift: [0.5cx+d2, -0.5cy-d2]
-        - ref: thumb_outer_row
+        - ref: thumb_outer
           shift: [-0.5cx-d2, -0.5cy-d2]
-        - ref: matrix_middle_bottom
-          shift: [0.5cx-d2, -0.5cy-d2]
-        - ref: matrix_middle_bottom
-          shift: [-0.5cx+d2, -0.5cy-d2]
+        - ref: matrix_index_bottom
+          shift: [-0.5cx-d2, -0.5cy-d2-1]
         - ref: matrix_ring_bottom
           shift: [0.5cx+d2, -0.5cy-d2]
         - ref: matrix_ring_bottom
@@ -175,17 +191,20 @@ outlines:
     - what: outline
       name: _raw
       fillet: 1
+    - what: outline
+      name: screws
+      operation: subtract
   _outer:
     - what: outline
       name: outer_raw
       fillet: 1
   _switch_outlines:
     - what: rectangle
-      where: true
+      where: [/^matrix_.*/, /^thumb_.*/]
       size: [cutout, cutout]
   _keycap_outlines:
     - what: rectangle
-      where: true
+      where: [/^matrix_.*/, /^thumb_.*/]
       size: [cx-0.5, cy-0.5]
   _mcubb:
     - what: polygon
@@ -215,6 +234,7 @@ outlines:
     - what: outline
       name: _mcubb
       operation: subtract
+      fillet: 1
   preview:
     - what: outline
       name: _cutout
@@ -236,7 +256,10 @@ outlines:
   plate_preview:
     - what: outline
       name: _plate
-  case:
+    - what: outline
+      name: screws
+      operation: subtract
+  case_wall:
     - what: outline
       name: _outer
     - what: outline
@@ -265,7 +288,7 @@ pcbs:
       - where: matrix_far_home
         what: ceoloide/mcu_nice_nano
         adjust:
-          shift: [cx+7, 8.3]
+          shift: [cx+7, 9.3]
         params:
           reversible: true
       # Battery
@@ -288,7 +311,7 @@ pcbs:
       - where: matrix_far_home
         what: SW_B3U-1000P
         adjust:
-          shift: [2cx+0.7, -cy-9]
+          shift: [2cx-4, -cy-9]
           rotate: -90
         params:
           P1: GND
@@ -317,16 +340,15 @@ cases:
     - what: outline
       name: _plate
       extrude: 3
-  
   usb_cutout:
     - what: outline
       name: usb_cutout
       extrude: 100
-      rotate: [90, -12, 0]
+      rotate: [90, -4, 0]
       shift: [cx+9.25,5cy,10]
   wall:
     - what: outline
-      name: case
+      name: case_wall
       extrude: 15
   mcubb_wall:
     - what: outline
@@ -342,6 +364,10 @@ cases:
     - what: outline
       name: _cutout
       extrude: 3
+    - what: outline
+      name: _reset_hole
+      extrude: 3
+      operation: subtract
   upper:
     - what: case
       name: plate
