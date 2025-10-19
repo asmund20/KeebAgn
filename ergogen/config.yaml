@@ -11,6 +11,7 @@ meta:
 units:
   d: 2
   d2: 6
+  cutout: 14
 points:
   key:
     padding: cy
@@ -127,7 +128,6 @@ outlines:
           shift: [0.5cx+d, -0.5cy-d]
         - ref: matrix_outer_bottom
           shift: [-0.5cx-d, -0.5cy-d]
-  
   outer_raw:
     - what: polygon
       points:
@@ -173,10 +173,42 @@ outlines:
     - what: outline
       name: outer_raw
       fillet: 1
+  _switch_outlines:
+    - what: rectangle
+      where: true
+      size: [cutout, cutout]
   _keycap_outlines:
     - what: rectangle
       where: true
       size: [cx-0.5, cy-0.5]
+  _mcubb:
+    - what: polygon
+      points:
+        - ref: matrix_far_top
+          shift: [0.5cx+2d+1, 0.5cy+d]
+        - ref: matrix_far_top
+          shift: [2cx+1.25d, 0.5cy+d]
+        - ref: matrix_far_bottom
+          shift: [2cx+1.25d, -0.75cy-d]
+        - ref: matrix_far_bottom
+          shift: [0.5cx+2d+1, -0.5cy]
+  _mcubb_outer:
+    - what: polygon
+      points:
+        - ref: matrix_far_top
+          shift: [0.5cx+d, 0.5cy+d2+0.5]
+        - ref: matrix_far_top
+          shift: [2cx+1.25d2, 0.5cy+d2]
+        - ref: matrix_far_bottom
+          shift: [2cx+1.25d2, -0.75cy-1.5d2]
+        - ref: matrix_far_bottom
+          shift: [0.5cx+d, -0.5cy-1.5d]
+  mcubb_wall:
+    - what: outline
+      name: _mcubb_outer
+    - what: outline
+      name: _mcubb
+      operation: subtract
   preview:
     - what: outline
       name: _cutout
@@ -185,17 +217,15 @@ outlines:
       operation: subtract
   plate:
     - what: outline
-      name: preview
-    - what: polygon
-      points:
-        - ref: matrix_far_top
-          shift: [0.5cx+2d, 0.5cy+d]
-        - ref: matrix_far_top
-          shift: [2.5cx, 0.5cy+d]
-        - ref: matrix_far_bottom
-          shift: [2.5cx, -0.75cy-d]
-        - ref: matrix_far_bottom
-          shift: [0.5cx+2d, -0.5cy]
+      name: _cutout
+    - what: outline
+      name: _switch_outlines
+      operation: subtract
+    - what: outline
+      name: _mcubb
+      operation: subtract
+    - what: outline
+      name: mcubb_wall
       operation: subtract
   case:
     - what: outline
@@ -203,6 +233,18 @@ outlines:
     - what: outline
       name: _raw
       operation: subtract
+  lid:
+    - what: outline
+      name: outer_raw
+    - what: outline
+      name: _mcubb_outer
+      operation: subtract
+
+  usb_cutout:
+    - what: rectangle
+      where: matrix_far_home
+      size: [10, 5]
+      corner: 2
 
 pcbs:
   pcb:
@@ -214,14 +256,14 @@ pcbs:
       - where: matrix_far_home
         what: ceoloide/mcu_nice_nano
         adjust:
-          shift: [cx+6, 8.3]
+          shift: [cx+7, 8.3]
         params:
           reversible: true
       # Battery
       - where: matrix_far_home
         what: ceoloide/battery_connector_jst_ph_2
         adjust:
-          shift: [1.3cx, -1.8cy]
+          shift: [1.3cx, -cy-7]
           rotate: 180
         params:
           reversible: true
@@ -229,7 +271,7 @@ pcbs:
       - where: matrix_far_home
         what: ceoloide/power_switch_smd_side
         adjust:
-          shift: [2cx+0.8, -1.3cy]
+          shift: [2cx+0.8, -cy+2]
         params:
           from: pos
           to: RAW
@@ -237,7 +279,7 @@ pcbs:
       - where: matrix_far_home
         what: SW_B3U-1000P
         adjust:
-          shift: [2cx+0.7, -2cy]
+          shift: [2cx+0.7, -cy-9]
           rotate: -90
         params:
           P1: GND
@@ -266,11 +308,27 @@ cases:
     - what: outline
       name: plate
       extrude: 3
-
+  
+  usb_cutout:
+    - what: outline
+      name: usb_cutout
+      extrude: 100
+      rotate: [90, -12, 0]
+      shift: [cx+9.25,5cy,10]
   wall:
     - what: outline
       name: case
       extrude: 15
+  mcubb_wall:
+    - what: outline
+      name: mcubb_wall
+      extrude: 10
+      shift: [0,0,10]
+  mcubb_top:
+    - what: outline
+      name: _mcubb_outer
+      shift: [0, 0, 20]
+      extrude: 4
   bottom:
     - what: outline
       name: _cutout
@@ -281,9 +339,20 @@ cases:
       shift: [0,0,10]
     - what: case
       name: wall
+    - what: case
+      name: mcubb_wall
+    - what: case
+      name: mcubb_top
+    - what: case
+      name: usb_cutout
+      operation: subtract
   case:
     - what: case
       name: upper
     - what: case
       name: bottom
-      
+  lid:
+    - what: outline
+      name: lid
+      extrude: 9
+      shift: [0,0,15]
