@@ -91,6 +91,12 @@ points:
             stagger: -8
 
 outlines:
+  _screw_outline:
+    - what: circle
+      radius: 4
+    - what: circle
+      radius: 2
+      operation: subtract
   _raw:
     - what: polygon
       points:
@@ -215,7 +221,7 @@ outlines:
     - what: outline
       name: _keycap_outlines
       operation: subtract
-  plate:
+  _plate:
     - what: outline
       name: _cutout
     - what: outline
@@ -227,6 +233,9 @@ outlines:
     - what: outline
       name: mcubb_wall
       operation: subtract
+  plate_preview:
+    - what: outline
+      name: _plate
   case:
     - what: outline
       name: _outer
@@ -306,7 +315,7 @@ pcbs:
 cases:
   plate:
     - what: outline
-      name: plate
+      name: _plate
       extrude: 3
   
   usb_cutout:
