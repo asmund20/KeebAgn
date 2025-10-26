@@ -315,6 +315,7 @@ pcbs:
         params:
           from: =colrow
           to: =row_net
+          reversible: true
         adjust:
           shift: [0,-5]
       # Switches
