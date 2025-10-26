@@ -25,67 +25,63 @@ points:
       rows:
         bottom:
           key:
-            row_net: P10
+            row_net: P21
         home:
           key:
-            row_net: P3
+            row_net: P1
         top:
           key:
-            row_net: P1
+            row_net: P0
       columns:
         outer:
           key:
-            column_net: P7
+            column_net: P20
         pinkie:
           key:
             tags: pinkie
-            column_net: P2
+            column_net: P19
             spread: cx
         ring:
           key:
             tags: ring
-            column_net: P5
+            column_net: P18
             stagger: 0.5cy
             spread: cx+1.5
             splay: -4
         middle:
           key:
             tags: middle
-            column_net: P6
+            column_net: P15
             stagger: 0.5cy
             spread: cx+1.5
             splay: -4
         index:
           key:
-            column_net: P8
+            column_net: P14
             spread: cx+1.5
             stagger: -0.5cy
             splay: -4
         far:
           key:
-            column_net: P9
+            column_net: P10
             spread: cx
     thumb:
       anchor:
         ref: matrix_index_bottom
         shift: [0, -cy]
-      rows.default.key.row_net: P11
+      rows.default.key.row_net: P9
       columns:
-        outer:
-          key:
-            column_net: P6
-        central:
-          key:
-            column_net: P8
-            spread: cx+4
-            rotate: -15
-            stagger: -4
-        far:
-          key:
-            column_net: P9
-            spread: cx+2
-            rotate: -25
-            stagger: -8
+        outer.key.column_net: P15
+        central.key:
+          column_net: P14
+          spread: cx+4
+          rotate: -15
+          stagger: -4
+        far.key:
+          column_net: P10
+          spread: cx+2
+          rotate: -25
+          stagger: -8
       
 outlines:
   _screw_outline:
@@ -191,9 +187,6 @@ outlines:
     - what: outline
       name: _raw
       fillet: 1
-    - what: outline
-      name: screws
-      operation: subtract
   _outer:
     - what: outline
       name: outer_raw
@@ -253,12 +246,12 @@ outlines:
     - what: outline
       name: mcubb_wall
       operation: subtract
-  plate_preview:
-    - what: outline
-      name: _plate
     - what: outline
       name: screws
       operation: subtract
+  plate_preview:
+    - what: outline
+      name: _plate
   case_wall:
     - what: outline
       name: _outer
@@ -271,7 +264,6 @@ outlines:
     - what: outline
       name: _mcubb_outer
       operation: subtract
-
   usb_cutout:
     - what: rectangle
       where: matrix_far_home
@@ -334,12 +326,29 @@ pcbs:
           reversible: true
           include_corner_marks: true
           choc_v1_support: false
+      
+      # Screw holes
+      - where: matrix_pinkie_top
+        what: ceoloide/mounting_hole_plated
+        adjust.shift: [0.5cx+2, 0]
+      - where: matrix_pinkie_home
+        what: ceoloide/mounting_hole_plated
+        adjust.shift: [0.5cx+0.75, 0]
+      - where: matrix_middle_home
+        what: ceoloide/mounting_hole_plated
+        adjust.shift: [0.5cx+2, 0]
+      - where: matrix_middle_bottom
+        what: ceoloide/mounting_hole_plated
+        adjust.shift: [0.5cx+0.75, 0]
+      - where: thumb_central
+        what: ceoloide/mounting_hole_plated
+        adjust.shift: [0.5cx+1.5, 0]
 
 cases:
   plate:
     - what: outline
       name: _plate
-      extrude: 3
+      extrude: 1.6
   usb_cutout:
     - what: outline
       name: usb_cutout
