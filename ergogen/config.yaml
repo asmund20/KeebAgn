@@ -313,8 +313,8 @@ pcbs:
       - where: true
         what: ceoloide/diode_tht_sod123
         params:
-          from: =colrow
-          to: =row_net
+          from: "{{colrow}}"
+          to: "{{row_net}}"
           reversible: true
         adjust:
           shift: [0,-5]
@@ -322,8 +322,8 @@ pcbs:
       - where: true
         what: ceoloide/switch_choc_v1_v2
         params:
-          from: =column_net
-          to: =colrow
+          from: "{{column_net}}"
+          to: "{{colrow}}"
           reversible: true
           include_corner_marks: true
           choc_v1_support: false
