@@ -2,10 +2,6 @@
 # SPDX-License-Identifier: MIT
 # To view a copy of this license, visit https://opensource.org/license/mit/
 
-# TODO:
-  # Add vias for connecting the battery connector nets
-  # Add screw holes
-
 meta:
   engine: 4.1.0
 units:
@@ -23,48 +19,35 @@ points:
         shift: [100,-100]
         rotate: 8
       rows:
-        bottom:
-          key:
-            row_net: P21
-        home:
-          key:
-            row_net: P1
-        top:
-          key:
-            row_net: P0
+        bottom.row_net: P21
+        home.row_net: P1
+        top.row_net: P0
       columns:
-        outer:
-          key:
-            column_net: P20
-        pinkie:
-          key:
-            tags: pinkie
-            column_net: P19
-            spread: cx
-        ring:
-          key:
-            tags: ring
-            column_net: P18
-            stagger: 0.5cy
-            spread: cx+1.5
-            splay: -4
-        middle:
-          key:
-            tags: middle
-            column_net: P15
-            stagger: 0.5cy
-            spread: cx+1.5
-            splay: -4
-        index:
-          key:
-            column_net: P14
-            spread: cx+1.5
-            stagger: -0.5cy
-            splay: -4
-        far:
-          key:
-            column_net: P10
-            spread: cx
+        outer.key.column_net: P20
+        pinkie.key:
+          tags: pinkie
+          column_net: P19
+          spread: cx
+        ring.key:
+          tags: ring
+          column_net: P18
+          stagger: 0.5cy
+          spread: cx+1.5
+          splay: -4
+        middle.key:
+          tags: middle
+          column_net: P15
+          stagger: 0.5cy
+          spread: cx+1.5
+          splay: -4
+        index.key:
+          column_net: P14
+          spread: cx+1.5
+          stagger: -0.5cy
+          splay: -4
+        far.key:
+          column_net: P10
+          spread: cx
     thumb:
       anchor:
         ref: matrix_index_bottom
@@ -297,8 +280,10 @@ pcbs:
         adjust:
           shift: [2cx+0.8, -cy+2]
         params:
-          from: pos
+          from: BAT_P
           to: RAW
+          reversible: true
+          invert_behavior: false
       # Reset button
       - where: matrix_far_home
         what: SW_B3U-1000P
