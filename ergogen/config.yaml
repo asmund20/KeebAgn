@@ -52,7 +52,7 @@ points:
       anchor:
         ref: matrix_index_bottom
         shift: [0, -cy]
-      rows.default.key.row_net: P9
+      rows.default.row_net: P9
       columns:
         outer.key.column_net: P15
         central.key:
