@@ -3,6 +3,12 @@ I am making a new split keyboard! It is based on the [last one I made](github.co
 
 It has the six by three main matrix and three thumb keys, like the Corne.
 
+## Clone
+To include the footprints from [ceoloide/ergogen-footprints](https://github.com/ceoloide/ergogen-footprints/tree/603afdc17dda267d4daffe45121c907b77b4d2de), clone with
+```
+git clone --recursive git@github.com:asmund20/KeebAgn.git
+```
+
 ## This is a work in progress, do not assume that it works
 
 ## Missing footprint in the Ergogen config
