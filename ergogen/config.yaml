@@ -276,7 +276,7 @@ pcbs:
           reversible: true
       # Power switch
       - where: matrix_far_home
-        what: ceoloide/power_switch_smd_side
+        what: power_switch_smd_side
         adjust:
           shift: [2cx+0.8, -cy+2]
         params:
