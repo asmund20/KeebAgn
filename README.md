@@ -3,7 +3,7 @@ I am making a new split keyboard! It is based on the [last one I made](github.co
 
 It has the six by three main matrix and three thumb keys, like the Corne.
 
-I have now ordered the pcb, which can be done by uploading the gerber.zip to a pcb prototype manufacturer. I have not recieved it yet, so nothing is tested.
+I have recieved the pcb. The spacing was too tight for the keycaps I bought, so will have to increase that.
 
 ## Clone
 To include the footprints from [ceoloide/ergogen-footprints](https://github.com/ceoloide/ergogen-footprints/tree/603afdc17dda267d4daffe45121c907b77b4d2de), clone with
