@@ -10,7 +10,7 @@ units:
   cutout: 14
 points:
   key:
-    padding: cy
+    padding: u
     bind: 1
 
   zones:
@@ -27,149 +27,154 @@ points:
         pinkie.key:
           tags: pinkie
           column_net: P19
-          spread: cx
+          spread: u
         ring.key:
           tags: ring
           column_net: P18
           stagger: 0.5cy
-          spread: cx+1.5
+          spread: u+1.5
           splay: -4
         middle.key:
           tags: middle
           column_net: P15
           stagger: 0.5cy
-          spread: cx+1.5
+          spread: u+1.5
           splay: -4
         index.key:
           column_net: P14
-          spread: cx+1.5
+          spread: u+1.5
           stagger: -0.5cy
           splay: -4
         far.key:
           column_net: P10
-          spread: cx
+          spread: u
     thumb:
       anchor:
         ref: matrix_index_bottom
-        shift: [0, -cy]
+        shift: [0, -u]
       rows.default.row_net: P9
       columns:
         outer.key.column_net: P15
         central.key:
           column_net: P14
-          spread: cx+4
+          spread: u+4
           rotate: -15
           stagger: -4
         far.key:
           column_net: P10
-          spread: cx+2
+          spread: u+2
           rotate: -25
           stagger: -8
-      
+    screws_left:
+      key.padding: 2u
+      anchor:
+        ref: matrix_outer_bottom
+        shift: [0.5u, -1]
+      rows:
+        top:
+        bottom:
+      columns.default:
+    screws_right:
+      key.padding: 2u
+      anchor:
+        ref: matrix_index_bottom
+        shift: [0.5u, -1]
+      rows:
+        top:
+        bottom:
+      columns.default:
+    screws_thumb:
+      anchor:
+        ref: thumb_central
+        shift: [0.5u+2, -1]
+    reset:
+      anchor:
+        ref: matrix_far_home
+        shift: [2u-4, -u-9]
+
 outlines:
-  _screw_outline:
+  screws:
     - what: circle
       radius: 1
-  screws:
-    - what: outline
-      name: _screw_outline
-      where: matrix_pinkie_top
-      adjust.shift: [0.5cx+2, 0]
-    - what: outline
-      name: _screw_outline
-      where: matrix_pinkie_home
-      adjust.shift: [0.5cx+0.75, 0]
-    - what: outline
-      name: _screw_outline
-      where: matrix_middle_home
-      adjust.shift: [0.5cx+2, 0]
-    - what: outline
-      name: _screw_outline
-      where: matrix_middle_bottom
-      adjust.shift: [0.5cx+0.75, 0]
-    - what: outline
-      name: _screw_outline
-      where: thumb_central
-      adjust.shift: [0.5cx+1.5, 0]
+      where: [/^screws_.*/]
   _reset_hole:
-    - what: outline
-      name: _screw_outline
-      where: matrix_far_home
-      adjust.shift: [2cx-4, -cy-9]
+    - what: circle
+      radius: 0.5
+      where: reset
   _raw:
     - what: polygon
       points:
         - ref: matrix_outer_top
-          shift: [-0.5cx-d, 0.5cy+d]
+          shift: [-0.5u-d, 0.5u+d]
         - ref: matrix_pinkie_top
-          shift: [0.5cx+d, 0.5cy+d]
+          shift: [0.5u+d, 0.5u+d]
         - ref: matrix_ring_top
-          shift: [-0.5cx-d, 0.5cy+d]
+          shift: [-0.5u-d, 0.5u+d]
         - ref: matrix_ring_top
-          shift: [0.5cx+d, 0.5cy+d]
+          shift: [0.5u+d, 0.5u+d]
         - ref: matrix_middle_top
-          shift: [-0.5cx-d, 0.5cy+d]
+          shift: [-0.5u-d, 0.5u+d]
         - ref: matrix_middle_top
-          shift: [0.5cx+d, 0.5cy+d]
+          shift: [0.5u+d, 0.5u+d]
         - ref: matrix_middle_top
-          shift: [0.5cx+d, 1.25d]
+          shift: [0.5u+d, 1.25d]
         - ref: matrix_far_top
-          shift: [2cx+1.25d, 0.5cy+d]
+          shift: [2u+1.25d, 0.5u+d]
         - ref: thumb_far
-          shift: [0.5cx+d, 0.5cy+d]
+          shift: [0.5u+d, 0.5u+d]
         - ref: thumb_far
-          shift: [0.5cx+d, -0.5cy-d]
+          shift: [0.5u+d, -0.5u-d]
         - ref: thumb_outer
-          shift: [-0.5cx-d, -0.5cy-d]
+          shift: [-0.5u-d, -0.5u-d]
         - ref: matrix_index_bottom
-          shift: [-0.5cx-d, -0.5cy-d]
+          shift: [-0.5u-d, -0.5u-d]
         - ref: matrix_ring_bottom
-          shift: [0.5cx+d, -0.5cy-d]
+          shift: [0.5u+d, -0.5u-d]
         - ref: matrix_ring_bottom
-          shift: [-0.5cx+d, -0.5cy-d]
+          shift: [-0.5u+d, -0.5u-d]
         - ref: matrix_pinkie_bottom
-          shift: [0.5cx+d, -0.5cy-d]
+          shift: [0.5u+d, -0.5u-d]
         - ref: matrix_outer_bottom
-          shift: [-0.5cx-d, -0.5cy-d]
+          shift: [-0.5u-d, -0.5u-d]
   outer_raw:
     - what: polygon
       points:
         - ref: matrix_outer_top
-          shift: [-0.5cx-d2, 0.5cy+d2]
+          shift: [-0.5u-d2, 0.5u+d2]
         - ref: matrix_pinkie_top
-          shift: [0.5cx-d, 0.5cy+d2]
+          shift: [0.5u-d, 0.5u+d2]
         - ref: matrix_ring_top
-          shift: [-0.5cx-d2, 0.5cy+d2]
+          shift: [-0.5u-d2, 0.5u+d2]
         - ref: matrix_ring_top
-          shift: [0.5cx-d, 0.5cy+d2]
+          shift: [0.5u-d, 0.5u+d2]
         - ref: matrix_middle_top
-          shift: [-0.5cx-d2, 0.5cy+d2]
+          shift: [-0.5u-d2, 0.5u+d2]
         - ref: matrix_middle_top
-          shift: [0.5cx+d2, 0.5cy+d2]
+          shift: [0.5u+d2, 0.5u+d2]
         - ref: matrix_middle_top
-          shift: [0.5cx+d2, 1.25d2]
+          shift: [0.5u+d2, 1.25d2]
         - ref: matrix_far_top
-          shift: [2cx+1.25d2, 0.5cy+d2]
+          shift: [2u+1.25d2, 0.5u+d2]
         - ref: thumb_far
-          shift: [0.5cx+1.25d2, 0.5cy+d]
+          shift: [0.5u+1.25d2, 0.5u+d]
         - ref: thumb_far
-          shift: [0.5cx+d2, -0.5cy-d2]
+          shift: [0.5u+d2, -0.5u-d2]
         - ref: thumb_outer
-          shift: [-0.5cx-d2, -0.5cy-d2]
+          shift: [-0.5u-d2, -0.5u-d2]
         - ref: matrix_index_bottom
-          shift: [-0.5cx-d2, -0.5cy-d2-1]
+          shift: [-0.5u-d2, -0.5u-d2-1]
         - ref: matrix_ring_bottom
-          shift: [0.5cx+d2, -0.5cy-d2]
+          shift: [0.5u+d2, -0.5u-d2]
         - ref: matrix_ring_bottom
-          shift: [-0.5cx+d2, -0.5cy-d2]
+          shift: [-0.5u+d2, -0.5u-d2]
         - ref: matrix_pinkie_bottom
-          shift: [0.5cx+d2, -0.5cy-d2]
+          shift: [0.5u+d2, -0.5u-d2]
         - ref: matrix_outer_bottom
-          shift: [-0.5cx-d2, -0.5cy-d2]
+          shift: [-0.5u-d2, -0.5u-d2]
   _cutout:
     - what: outline
       name: _raw
-      fillet: 1
+      fillet: 1.5
   _outer:
     - what: outline
       name: outer_raw
@@ -181,29 +186,29 @@ outlines:
   _keycap_outlines:
     - what: rectangle
       where: [/^matrix_.*/, /^thumb_.*/]
-      size: [cx-0.5, cy-0.5]
+      size: [u-0.5, u-0.5]
   _mcubb:
     - what: polygon
       points:
         - ref: matrix_far_top
-          shift: [0.5cx+2d+1, 0.5cy+d]
+          shift: [0.5u+10, 0.5u+d]
         - ref: matrix_far_top
-          shift: [2cx+1.25d, 0.5cy+d]
+          shift: [2u+1.25d, 0.5u+d]
         - ref: matrix_far_bottom
-          shift: [2cx+1.25d, -0.75cy-d]
+          shift: [2u+1.25d, -0.75u-d]
         - ref: matrix_far_bottom
-          shift: [0.5cx+2d+1, -0.5cy]
+          shift: [0.5u+10, -0.5u]
   _mcubb_outer:
     - what: polygon
       points:
         - ref: matrix_far_top
-          shift: [0.5cx+d, 0.5cy+d2+0.5]
+          shift: [0.5u+6, 0.5u+d2+0.5]
         - ref: matrix_far_top
-          shift: [2cx+1.25d2, 0.5cy+d2]
+          shift: [2u+1.25d2, 0.5u+d2]
         - ref: matrix_far_bottom
-          shift: [2cx+1.25d2, -0.75cy-1.5d2]
+          shift: [2u+1.25d2, -0.75u-1.5d2]
         - ref: matrix_far_bottom
-          shift: [0.5cx+d, -0.5cy-1.5d]
+          shift: [0.5u+6, -0.5u-1.5d]
   mcubb_wall:
     - what: outline
       name: _mcubb_outer
@@ -224,10 +229,7 @@ outlines:
       name: _switch_outlines
       operation: subtract
     - what: outline
-      name: _mcubb
-      operation: subtract
-    - what: outline
-      name: mcubb_wall
+      name: _mcubb_outer
       operation: subtract
     - what: outline
       name: screws
@@ -260,51 +262,51 @@ pcbs:
       - outline: _cutout
     footprints:
       # Nice nano
-      - where: matrix_far_home
+      - where: matrix_far_top
         what: ceoloide/mcu_nice_nano
         adjust:
-          shift: [cx+7, 9.3]
+          shift: [u+11, -6.7]
         params:
           reversible: true
       # Battery
       - where: matrix_far_home
         what: ceoloide/battery_connector_jst_ph_2
         adjust:
-          shift: [1.3cx, -cy-7]
+          shift: [1.3u, -u-7]
           rotate: 180
         params:
           reversible: true
       # Power switch
       - where: matrix_far_home
-        what: power_switch_smd_side
+        what: ceoloide/power_switch_smd_side
         adjust:
-          shift: [2cx+0.8, -cy+2]
+          shift: [2u+0.8, -u+2]
         params:
           from: BAT_P
           to: RAW
           reversible: true
           invert_behavior: false
       # Reset button
-      - where: matrix_far_home
+      - where: reset
         what: SW_B3U-1000P
         adjust:
-          shift: [2cx-4, -cy-9]
           rotate: -90
         params:
           P1: GND
           P2: RST
           reversible: true
       # Diodes
-      - where: true
+      - where: [/^matrix_.*/, /^thumb_.*/]
         what: ceoloide/diode_tht_sod123
         params:
           from: "{{colrow}}"
           to: "{{row_net}}"
           reversible: true
+          include_traces_vias: true
         adjust:
           shift: [0,-5]
       # Switches
-      - where: true
+      - where: [/^matrix_.*/, /^thumb_.*/]
         what: ceoloide/switch_choc_v1_v2
         params:
           from: "{{column_net}}"
@@ -314,21 +316,8 @@ pcbs:
           choc_v1_support: false
       
       # Screw holes
-      - where: matrix_pinkie_top
+      - where: [/^screws_.*/]
         what: ceoloide/mounting_hole_plated
-        adjust.shift: [0.5cx+2, 0]
-      - where: matrix_pinkie_home
-        what: ceoloide/mounting_hole_plated
-        adjust.shift: [0.5cx+0.75, 0]
-      - where: matrix_middle_home
-        what: ceoloide/mounting_hole_plated
-        adjust.shift: [0.5cx+2, 0]
-      - where: matrix_middle_bottom
-        what: ceoloide/mounting_hole_plated
-        adjust.shift: [0.5cx+0.75, 0]
-      - where: thumb_central
-        what: ceoloide/mounting_hole_plated
-        adjust.shift: [0.5cx+1.5, 0]
 
 cases:
   plate:
@@ -340,7 +329,7 @@ cases:
       name: usb_cutout
       extrude: 100
       rotate: [90, -4, 0]
-      shift: [cx+9.25,5cy,10]
+      shift: [u+14,5u,10]
   wall:
     - what: outline
       name: case_wall
