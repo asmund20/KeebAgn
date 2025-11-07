@@ -116,8 +116,8 @@ outlines:
           shift: [-0.5u-d, 0.5u+d]
         - ref: matrix_middle_top
           shift: [0.5u+d, 0.5u+d]
-        - ref: matrix_middle_top
-          shift: [0.5u+d, 1.25d]
+        - ref: matrix_index_top
+          shift: [-0.5u-1.5d, 0.5u+d]
         - ref: matrix_far_top
           shift: [2u+1.25d, 0.5u+d]
         - ref: thumb_far
