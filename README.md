@@ -3,7 +3,7 @@ I am making a new split keyboard! It is based on the [last one I made](github.co
 
 It has the six by three main matrix and three thumb keys, like the Corne.
 
-I have recieved the pcb. The spacing was too tight for the keycaps I bought, so will have to increase that.
+I have made some changes since the first prototype I recieved, which did not fit the mx spacing of the keycaps.
 
 ## Clone
 To include the footprints from [ceoloide/ergogen-footprints](https://github.com/ceoloide/ergogen-footprints/tree/603afdc17dda267d4daffe45121c907b77b4d2de), clone with
