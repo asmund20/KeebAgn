@@ -200,11 +200,12 @@ outlines:
           shift: [0.5u+10, -0.5u]
   _mcubb_outer:
     - what: polygon
+      fillet: 1
       points:
         - ref: matrix_far_top
-          shift: [0.5u+6, 0.5u+d2+0.5]
+          shift: [0.5u+6, 0.5u+d2]
         - ref: matrix_far_top
-          shift: [2u+1.25d2, 0.5u+d2]
+          shift: [2u+1.25d2, 0.5u+d2+0.01]
         - ref: matrix_far_bottom
           shift: [2u+1.25d2, -0.75u-1.5d2]
         - ref: matrix_far_bottom
@@ -224,7 +225,7 @@ outlines:
       operation: subtract
   _plate:
     - what: outline
-      name: _cutout
+      name: _raw
     - what: outline
       name: _switch_outlines
       operation: subtract
@@ -287,14 +288,14 @@ pcbs:
           reversible: true
           invert_behavior: false
       # Reset button
-      - where: reset
-        what: SW_B3U-1000P
-        adjust:
-          rotate: -90
-        params:
-          P1: GND
-          P2: RST
-          reversible: true
+      # - where: reset
+      #   what: SW_B3U-1000P
+      #   adjust:
+      #     rotate: -90
+      #   params:
+      #     P1: GND
+      #     P2: RST
+      #     reversible: true
       # Diodes
       - where: [/^matrix_.*/, /^thumb_.*/]
         what: ceoloide/diode_tht_sod123
@@ -327,13 +328,13 @@ cases:
   usb_cutout:
     - what: outline
       name: usb_cutout
-      extrude: 100
-      rotate: [90, -4, 0]
-      shift: [u+14,5u,10]
+      extrude: 6
+      rotate: [90, -4, -4]
+      shift: [u+14,2u-5,15]
   wall:
     - what: outline
       name: case_wall
-      extrude: 15
+      extrude: 11.6
   mcubb_wall:
     - what: outline
       name: mcubb_wall
@@ -346,7 +347,7 @@ cases:
       extrude: 4
   bottom:
     - what: outline
-      name: _cutout
+      name: _raw
       extrude: 3
     - what: outline
       name: _reset_hole
