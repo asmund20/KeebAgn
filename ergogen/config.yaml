@@ -97,6 +97,10 @@ outlines:
     - what: circle
       radius: 1
       where: [/^screws_.*/]
+  screw_sink:
+    - what: circle
+      where: [/^screws_.*/]
+      radius: 2
   _reset_hole:
     - what: circle
       radius: 0.5
@@ -223,21 +227,22 @@ outlines:
     - what: outline
       name: _keycap_outlines
       operation: subtract
-  _plate:
+  _plate_outline:
     - what: outline
       name: _raw
+    - what: outline
+      name: _mcubb
+      operation: subtract
+  plate:
+    - what: outline
+      name: _plate_outline
+      fillet: 1
     - what: outline
       name: _switch_outlines
       operation: subtract
     - what: outline
-      name: _mcubb_outer
-      operation: subtract
-    - what: outline
       name: screws
       operation: subtract
-  plate_preview:
-    - what: outline
-      name: _plate
   case_wall:
     - what: outline
       name: _outer
@@ -323,8 +328,8 @@ pcbs:
 cases:
   plate:
     - what: outline
-      name: _plate
-      extrude: 1.6
+      name: plate
+      extrude: 1.5
   usb_cutout:
     - what: outline
       name: usb_cutout
@@ -349,6 +354,14 @@ cases:
     - what: outline
       name: _raw
       extrude: 3
+    - what: outline
+      name: screws
+      operation: subtract
+      extrude: 3
+    - what: outline
+      name: screw_sink
+      extrude: 1
+      operation: subtract
     - what: outline
       name: _reset_hole
       extrude: 3
