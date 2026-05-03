@@ -140,7 +140,8 @@ outlines:
           shift: [0.5u+d, -0.5u-d]
         - ref: matrix_outer_bottom
           shift: [-0.5u-d, -0.5u-d]
-  outer_raw:
+      fillet: 1
+  outer:
     - what: polygon
       points:
         - ref: matrix_outer_top
@@ -175,14 +176,11 @@ outlines:
           shift: [0.5u+d2, -0.5u-d2]
         - ref: matrix_outer_bottom
           shift: [-0.5u-d2, -0.5u-d2]
+      fillet: 1
   _cutout:
     - what: outline
       name: _raw
       fillet: 1.5
-  _outer:
-    - what: outline
-      name: outer_raw
-      fillet: 1
   _switch_outlines:
     - what: rectangle
       where: [/^matrix_.*/, /^thumb_.*/]
@@ -245,15 +243,9 @@ outlines:
       operation: subtract
   case_wall:
     - what: outline
-      name: _outer
+      name: outer
     - what: outline
       name: _raw
-      operation: subtract
-  lid:
-    - what: outline
-      name: outer_raw
-    - what: outline
-      name: _mcubb_outer
       operation: subtract
   usb_cutout:
     - what: rectangle
@@ -384,8 +376,3 @@ cases:
       name: upper
     - what: case
       name: bottom
-  lid:
-    - what: outline
-      name: lid
-      extrude: 9
-      shift: [0,0,15]
