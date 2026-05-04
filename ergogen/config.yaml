@@ -8,6 +8,7 @@ units:
   d: 2
   d2: 6
   cutout: 14
+  case_gap: 0.8
 points:
   key:
     padding: u
@@ -141,6 +142,48 @@ outlines:
         - ref: matrix_outer_bottom
           shift: [-0.5u-d, -0.5u-d]
       fillet: 1
+  _bottom_outer:
+    - what: polygon
+      points:
+        - ref: matrix_outer_top
+          shift: [-0.5u-d+case_gap, 0.5u+d-case_gap]
+        - ref: matrix_pinkie_top
+          shift: [0.5u+d+case_gap, 0.5u+d-case_gap]
+        - ref: matrix_ring_top
+          shift: [-0.5u-d+case_gap, 0.5u+d-case_gap]
+        - ref: matrix_ring_top
+          shift: [0.5u+d+case_gap, 0.5u+d-case_gap]
+        - ref: matrix_middle_top
+          shift: [-0.5u-d+case_gap, 0.5u+d-case_gap]
+        - ref: matrix_middle_top
+          shift: [0.5u+d-case_gap, 0.5u+d-case_gap]
+        - ref: matrix_index_top
+          shift: [-0.5u-1.5d-case_gap, 0.5u+d-case_gap]
+        - ref: matrix_far_top
+          shift: [2u+1.25d-case_gap, 0.5u+d-case_gap]
+        - ref: thumb_far
+          shift: [0.5u+d-case_gap, 0.5u+d]
+        - ref: thumb_far
+          shift: [0.5u+d-case_gap, -0.5u-d+case_gap]
+        - ref: thumb_outer
+          shift: [-0.5u-d+case_gap, -0.5u-d+case_gap]
+        - ref: matrix_index_bottom
+          shift: [-0.5u-d+case_gap, -0.5u-d+case_gap]
+        - ref: matrix_ring_bottom
+          shift: [0.5u+d+case_gap, -0.5u-d+case_gap]
+        - ref: matrix_ring_bottom
+          shift: [-0.5u+d-case_gap, -0.5u-d+case_gap]
+        - ref: matrix_pinkie_bottom
+          shift: [0.5u+d-case_gap, -0.5u-d+case_gap]
+        - ref: matrix_outer_bottom
+          shift: [-0.5u-d+case_gap, -0.5u-d+case_gap]
+      fillet: 0.5
+  case_gap:
+    - what: outline
+      name: _raw
+    - what: outline
+      name: _bottom_outer
+      operation: subtract
   outer:
     - what: polygon
       points:
@@ -344,7 +387,7 @@ cases:
       extrude: 4
   bottom:
     - what: outline
-      name: _raw
+      name: _bottom_outer
       extrude: 3
     - what: outline
       name: screws
