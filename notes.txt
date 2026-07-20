@@ -1,0 +1,7 @@
+Usb-c kabel-ende (ikke selve konnektor, men plasten rundt:
+13*8.2mm
+
+Høyde usb-c female: 3.2mm
+
+Pcb-bunn til høyeste punkt på mcu (topp usb-c): 9.85mm
+Pcb-tykkelse 1.55mm
