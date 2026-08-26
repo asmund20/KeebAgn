@@ -5,3 +5,26 @@ Høyde usb-c female: 3.2mm
 
 Pcb-bunn til høyeste punkt på mcu (topp usb-c): 9.85mm
 Pcb-tykkelse 1.55mm
+Bunn switch (topp pcb) til topp på plate er ca 1.7mm. Det gir ca 0.15mm mellom plate og pcb.
+Alt i mm
+
+Topp plate: 1.6
+Bunn plate: 0
+Topp pcb: -0.15
+Bunn pcb: -1.7
+Topp standoff: -1.7
+Bunn standoff: -3.7
+Topp Mutter: -5.7
+
+Topp plate til topp mutter: 7.3
+Kjøpte skruer: 8
+
+Pcb-topp til topp usb: 8.3
+Plate-bunn til topp usb: 8.15
+Plate-bunn til midt usb: 6.55
+
+
+Ergogen case:
+Posisjonering tar utgangspunkt i å posisjonere et plan. Det er litt uklart for polygoner, men for rectangle og circle sikkert, plasserer en midtpunktet. Extrude går kun mot positiv z, så shift: [0, 0, 5] extrude: 3 vil dekke intervallet z: [5, 8].
+
+Rotasjon fungerer litt rart kanskje, men det er muligens fordi jeg har splay. Translasjon fungerer som forventet uavhengig av rotering, midtpunktet av grunnplante flyttes fortsatt langs de samme aksene.
