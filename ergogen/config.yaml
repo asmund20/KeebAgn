@@ -3,10 +3,7 @@
 # To view a copy of this license, visit https://opensource.org/license/mit/
 
 # TODO:
-# Measure usb cable to see how large the hole has to be
-# Make a hole for power switch
-# Measure height of MCU to place the usb hole and set up the proper amount of space on the inside
-# Calculate the space necessary between the top and bottom, and make sure there is enough room
+# Figure out and set the main wall height
 # Mirror the case? Maybe that should be done in a 3d modeling software
 # Smooth out all edges slightly. 3d software necessary
 
@@ -17,6 +14,8 @@ units:
   d2: 6
   cutout: 14
   case_gap: 0.8
+  wall_height: 11.6
+  plate_thickness: 1.6
 points:
   key:
     padding: u
@@ -26,7 +25,7 @@ points:
     matrix:
       anchor:
         shift: [100,-100]
-        rotate: 8
+        rotate: 12
       rows:
         bottom.row_net: P21
         home.row_net: P1
@@ -150,84 +149,21 @@ outlines:
         - ref: matrix_outer_bottom
           shift: [-0.5u-d, -0.5u-d]
       fillet: 1
-  _bottom_outer:
-    - what: polygon
-      points:
-        - ref: matrix_outer_top
-          shift: [-0.5u-d+case_gap, 0.5u+d-case_gap]
-        - ref: matrix_pinkie_top
-          shift: [0.5u+d+case_gap, 0.5u+d-case_gap]
-        - ref: matrix_ring_top
-          shift: [-0.5u-d+case_gap, 0.5u+d-case_gap]
-        - ref: matrix_ring_top
-          shift: [0.5u+d+case_gap, 0.5u+d-case_gap]
-        - ref: matrix_middle_top
-          shift: [-0.5u-d+case_gap, 0.5u+d-case_gap]
-        - ref: matrix_middle_top
-          shift: [0.5u+d-case_gap, 0.5u+d-case_gap]
-        - ref: matrix_index_top
-          shift: [-0.5u-1.5d-case_gap, 0.5u+d-case_gap]
-        - ref: matrix_far_top
-          shift: [2u+1.25d-case_gap, 0.5u+d-case_gap]
-        - ref: thumb_far
-          shift: [0.5u+d-case_gap, 0.5u+d]
-        - ref: thumb_far
-          shift: [0.5u+d-case_gap, -0.5u-d+case_gap]
-        - ref: thumb_outer
-          shift: [-0.5u-d+case_gap, -0.5u-d+case_gap]
-        - ref: matrix_index_bottom
-          shift: [-0.5u-d+case_gap, -0.5u-d+case_gap]
-        - ref: matrix_ring_bottom
-          shift: [0.5u+d+case_gap, -0.5u-d+case_gap]
-        - ref: matrix_ring_bottom
-          shift: [-0.5u+d-case_gap, -0.5u-d+case_gap]
-        - ref: matrix_pinkie_bottom
-          shift: [0.5u+d-case_gap, -0.5u-d+case_gap]
-        - ref: matrix_outer_bottom
-          shift: [-0.5u-d+case_gap, -0.5u-d+case_gap]
-      fillet: 0.5
+  inner:
+      - what: outline
+        name: _raw
+        expand: 0.5
+  outer:
+    - what: outline
+      name: inner
+      expand: 1.5
+      fillet: 1
   case_gap:
     - what: outline
-      name: _raw
+      name: inner
     - what: outline
-      name: _bottom_outer
+      name: _raw
       operation: subtract
-  outer:
-    - what: polygon
-      points:
-        - ref: matrix_outer_top
-          shift: [-0.5u-d2, 0.5u+d2]
-        - ref: matrix_pinkie_top
-          shift: [0.5u-d, 0.5u+d2]
-        - ref: matrix_ring_top
-          shift: [-0.5u-d2, 0.5u+d2]
-        - ref: matrix_ring_top
-          shift: [0.5u-d, 0.5u+d2]
-        - ref: matrix_middle_top
-          shift: [-0.5u-d2, 0.5u+d2]
-        - ref: matrix_middle_top
-          shift: [0.5u+d2, 0.5u+d2]
-        - ref: matrix_middle_top
-          shift: [0.5u+d2, 1.25d2]
-        - ref: matrix_far_top
-          shift: [2u+1.25d2, 0.5u+d2]
-        - ref: thumb_far
-          shift: [0.5u+1.25d2, 0.5u+d]
-        - ref: thumb_far
-          shift: [0.5u+d2, -0.5u-d2]
-        - ref: thumb_outer
-          shift: [-0.5u-d2, -0.5u-d2]
-        - ref: matrix_index_bottom
-          shift: [-0.5u-d2, -0.5u-d2-1]
-        - ref: matrix_ring_bottom
-          shift: [0.5u+d2, -0.5u-d2]
-        - ref: matrix_ring_bottom
-          shift: [-0.5u+d2, -0.5u-d2]
-        - ref: matrix_pinkie_bottom
-          shift: [0.5u+d2, -0.5u-d2]
-        - ref: matrix_outer_bottom
-          shift: [-0.5u-d2, -0.5u-d2]
-      fillet: 1
   _cutout:
     - what: outline
       name: _raw
@@ -252,17 +188,9 @@ outlines:
         - ref: matrix_far_bottom
           shift: [0.5u+10, -0.5u]
   _mcubb_outer:
-    - what: polygon
-      fillet: 1
-      points:
-        - ref: matrix_far_top
-          shift: [0.5u+6, 0.5u+d2]
-        - ref: matrix_far_top
-          shift: [2u+1.25d2, 0.5u+d2+0.01]
-        - ref: matrix_far_bottom
-          shift: [2u+1.25d2, -0.75u-1.5d2]
-        - ref: matrix_far_bottom
-          shift: [0.5u+6, -0.5u-1.5d]
+    - what: outline
+      name: _mcubb
+      expand: 2
   mcubb_wall:
     - what: outline
       name: _mcubb_outer
@@ -276,16 +204,12 @@ outlines:
     - what: outline
       name: _keycap_outlines
       operation: subtract
-  _plate_outline:
+  plate:
     - what: outline
-      name: _raw
+      name: outer
     - what: outline
       name: _mcubb
       operation: subtract
-  plate:
-    - what: outline
-      name: _plate_outline
-      fillet: 1
     - what: outline
       name: _switch_outlines
       operation: subtract
@@ -296,13 +220,20 @@ outlines:
     - what: outline
       name: outer
     - what: outline
-      name: _raw
+      name: inner
       operation: subtract
   usb_cutout:
     - what: rectangle
       where: matrix_far_home
-      size: [10, 5]
+      size: [13.2, 8.5]
       corner: 2
+  power_switch_cutout:
+    - what: rectangle
+      where: matrix_far_home
+      size: [3, 7]
+      corner: 1
+      adjust:
+        shift: [2u+0.8, -u+2]
 
 pcbs:
   pcb:
@@ -372,30 +303,33 @@ cases:
   plate:
     - what: outline
       name: plate
-      extrude: 1.5
+      extrude: plate_thickness
   _usb_cutout:
     - what: outline
       name: usb_cutout
-      extrude: 6
-      rotate: [90, -4, -4]
-      shift: [u+14,2u-5,15]
-  _wall:
+      extrude: 12
+  power_switch_cutout:
+    - what: outline
+      name: power_switch_cutout
+      extrude: 5
+  wall:
     - what: outline
       name: case_wall
-      extrude: 11.6
+      extrude: wall_height
+      shift: [0, 0, -wall_height]
   _mcubb_wall:
     - what: outline
       name: mcubb_wall
-      extrude: 10
-      shift: [0,0,10]
+      extrude: 8.5
+      shift: [0, 0, plate_thickness]
   _mcubb_top:
     - what: outline
       name: _mcubb_outer
-      shift: [0, 0, 20]
-      extrude: 4
+      shift: [0, 0, 8.5+plate_thickness]
+      extrude: 2
   bottom:
     - what: outline
-      name: _bottom_outer
+      name: _raw
       extrude: 3
     - what: outline
       name: screws
@@ -412,18 +346,26 @@ cases:
   upper:
     - what: case
       name: plate
-      shift: [0,0,10]
     - what: case
-      name: _wall
+      name: wall
     - what: case
       name: _mcubb_wall
     - what: case
       name: _mcubb_top
     - what: case
       name: _usb_cutout
+      shift: [u+11, 2u-5, 6.55]
+      rotate: [90, 0, 0]
+      operation: subtract
+    - what: case
+      name: power_switch_cutout
+      shift: [0, 0, 0.6]
+      rotate: [0, 90, 0]
       operation: subtract
   case:
     - what: case
       name: upper
     - what: case
       name: bottom
+      shift: [0, 0, -wall_height]
+
