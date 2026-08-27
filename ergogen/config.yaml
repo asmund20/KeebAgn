@@ -2,11 +2,6 @@
 # SPDX-License-Identifier: MIT
 # To view a copy of this license, visit https://opensource.org/license/mit/
 
-# TODO:
-# Figure out and set the main wall height
-# Mirror the case? Maybe that should be done in a 3d modeling software
-# Smooth out all edges slightly. 3d software necessary
-
 meta:
   engine: 4.1.0
 units:
@@ -14,7 +9,7 @@ units:
   d2: 6
   cutout: 14
   case_gap: 0.8
-  wall_height: 11.6
+  wall_height: 6.7
   plate_thickness: 1.6
 points:
   key:
@@ -106,9 +101,18 @@ outlines:
       radius: 1
       where: [/^screws_.*/]
   screw_sink:
-    - what: circle
+    - what: polygon
       where: [/^screws_.*/]
-      radius: 2
+      points:
+        - shift: [4/sqrt(3), 0]
+        - shift: [-2/sqrt(3), 2]
+        - shift: [-4/sqrt(3), 0]
+        - shift: [-2/sqrt(3), -2]
+        - shift: [2/sqrt(3), -2]
+        - shift: [4/sqrt(3), 0]
+      expand: 0.1
+
+
   _reset_hole:
     - what: circle
       radius: 0.5
@@ -337,7 +341,7 @@ cases:
       extrude: 3
     - what: outline
       name: screw_sink
-      extrude: 1
+      extrude: 1.6
       operation: subtract
     - what: outline
       name: _reset_hole
