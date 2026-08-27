@@ -15,6 +15,7 @@ Bunn pcb: -1.7
 Topp standoff: -1.7
 Bunn standoff: -3.7
 Topp Mutter: -5.7
+Bunn case: -6.7
 
 Topp plate til topp mutter: 7.3
 Kjøpte skruer: 8
@@ -26,5 +27,3 @@ Plate-bunn til midt usb: 6.55
 
 Ergogen case:
 Posisjonering tar utgangspunkt i å posisjonere et plan. Det er litt uklart for polygoner, men for rectangle og circle sikkert, plasserer en midtpunktet. Extrude går kun mot positiv z, så shift: [0, 0, 5] extrude: 3 vil dekke intervallet z: [5, 8].
-
-Rotasjon fungerer litt rart kanskje, men det er muligens fordi jeg har splay. Translasjon fungerer som forventet uavhengig av rotering, midtpunktet av grunnplante flyttes fortsatt langs de samme aksene.
