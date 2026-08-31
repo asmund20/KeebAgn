@@ -11,6 +11,7 @@ units:
   case_gap: 0.8
   wall_height: 6.7
   plate_thickness: 1.6
+  mcubb_wall_height: 6.5
 points:
   key:
     padding: u
@@ -115,7 +116,7 @@ outlines:
 
   _reset_hole:
     - what: circle
-      radius: 0.5
+      radius: 1
       where: reset
   _raw:
     - what: polygon
@@ -156,7 +157,7 @@ outlines:
   inner:
       - what: outline
         name: _raw
-        expand: 0.5
+        expand: 0.2
   outer:
     - what: outline
       name: inner
@@ -229,12 +230,12 @@ outlines:
   usb_cutout:
     - what: rectangle
       where: matrix_far_home
-      size: [13.2, 8.5]
+      size: [13, 6.5]
       corner: 2
   power_switch_cutout:
     - what: rectangle
       where: matrix_far_home
-      size: [3, 7]
+      size: [5, 7]
       corner: 1
       adjust:
         shift: [2u+0.8, -u+2]
@@ -324,12 +325,12 @@ cases:
   _mcubb_wall:
     - what: outline
       name: mcubb_wall
-      extrude: 8.5
+      extrude: mcubb_wall_height
       shift: [0, 0, plate_thickness]
   _mcubb_top:
     - what: outline
       name: _mcubb_outer
-      shift: [0, 0, 8.5+plate_thickness]
+      shift: [0, 0, mcubb_wall_height+plate_thickness]
       extrude: 2
   bottom:
     - what: outline
