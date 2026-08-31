@@ -3,7 +3,8 @@ Usb-c kabel-ende (ikke selve konnektor, men plasten rundt:
 
 Høyde usb-c female: 3.2mm
 
-Pcb-bunn til høyeste punkt på mcu (topp usb-c): 9.85mm
+Pcb-bunn til høyeste punkt på mcu (topp usb-c): 9.75mm
+pcb topp til topp usb-c: 8.05
 Pcb-tykkelse 1.55mm
 Bunn switch (topp pcb) til topp på plate er ca 1.7mm. Det gir ca 0.15mm mellom plate og pcb.
 Alt i mm
