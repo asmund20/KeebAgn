@@ -1,6 +1,10 @@
 # Copyright (c) 2025 Åsmund Olai Sand-Larsen
 # SPDX-License-Identifier: MIT
 # To view a copy of this license, visit https://opensource.org/license/mit/
+#
+# Fix wall height. If I am going to use 4mm standoffs, increase 3mm. If 2mm
+# standoffs, use 1mm.
+# Does the reset button hole work?
 
 meta:
   engine: 4.1.0
@@ -10,7 +14,8 @@ units:
   cutout: 14
   case_gap: 0.8
   wall_height: 6.7
-  plate_thickness: 1.6
+  plate_thickness: 1.5
+  wall_thickness: 1.5
   mcubb_wall_height: 6.5
 points:
   key:
@@ -161,7 +166,7 @@ outlines:
   outer:
     - what: outline
       name: inner
-      expand: 1.5
+      expand: wall_thickness
       fillet: 1
   case_gap:
     - what: outline
@@ -195,14 +200,14 @@ outlines:
   _mcubb_outer:
     - what: outline
       name: _mcubb
-      expand: 2
+      expand: wall_thickness
   mcubb_wall:
     - what: outline
+      fillet: 1
       name: _mcubb_outer
     - what: outline
       name: _mcubb
       operation: subtract
-      fillet: 1
   preview:
     - what: outline
       name: _cutout
@@ -230,7 +235,7 @@ outlines:
   usb_cutout:
     - what: rectangle
       where: matrix_far_home
-      size: [13, 6.5]
+      size: [13, 7]
       corner: 2
   power_switch_cutout:
     - what: rectangle
@@ -359,7 +364,7 @@ cases:
       name: _mcubb_top
     - what: case
       name: _usb_cutout
-      shift: [u+11, 2u-5, 6.55]
+      shift: [u+11, 2u-5, mcubb_wall_height + plate_thickness-3]
       rotate: [90, 0, 0]
       operation: subtract
     - what: case
