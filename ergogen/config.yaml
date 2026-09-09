@@ -1,10 +1,6 @@
 # Copyright (c) 2025 Åsmund Olai Sand-Larsen
 # SPDX-License-Identifier: MIT
 # To view a copy of this license, visit https://opensource.org/license/mit/
-#
-# Fix wall height. If I am going to use 4mm standoffs, increase 3mm. If 2mm
-# standoffs, use 1mm.
-# Does the reset button hole work?
 
 meta:
   engine: 4.1.0
@@ -116,12 +112,12 @@ outlines:
         - shift: [-2/sqrt(3), -2]
         - shift: [2/sqrt(3), -2]
         - shift: [4/sqrt(3), 0]
-      expand: 0.1
+      expand: 0.05
 
 
   _reset_hole:
     - what: circle
-      radius: 1
+      radius: 0.7
       where: reset
   _raw:
     - what: polygon
@@ -162,7 +158,7 @@ outlines:
   inner:
       - what: outline
         name: _raw
-        expand: 0.2
+        expand: 0.3
   outer:
     - what: outline
       name: inner
@@ -347,7 +343,7 @@ cases:
       extrude: 3
     - what: outline
       name: screw_sink
-      extrude: 1.6
+      extrude: 2
       operation: subtract
     - what: outline
       name: _reset_hole
