@@ -112,7 +112,7 @@ outlines:
         - shift: [-2/sqrt(3), -2]
         - shift: [2/sqrt(3), -2]
         - shift: [4/sqrt(3), 0]
-      expand: 0.05
+      expand: 0.1
 
 
   _reset_hole:
