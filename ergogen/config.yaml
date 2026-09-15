@@ -117,7 +117,7 @@ outlines:
 
   _reset_hole:
     - what: circle
-      radius: 0.7
+      radius: 0.8
       where: reset
   _raw:
     - what: polygon
@@ -231,7 +231,7 @@ outlines:
   usb_cutout:
     - what: rectangle
       where: matrix_far_home
-      size: [13, 7]
+      size: [10, 4]
       corner: 2
   power_switch_cutout:
     - what: rectangle
@@ -360,7 +360,7 @@ cases:
       name: _mcubb_top
     - what: case
       name: _usb_cutout
-      shift: [u+11, 2u-5, mcubb_wall_height + plate_thickness-3]
+      shift: [u+11.5, 2u-5, mcubb_wall_height + plate_thickness-1]
       rotate: [90, 0, 0]
       operation: subtract
     - what: case
