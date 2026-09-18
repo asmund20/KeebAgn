@@ -1,5 +1,11 @@
 # KeebAgn (KeebAgain)
-So the board is noe done. It works nicely! It is based on the [last one I made](github.com/asmund20/keyboard_journey).
+<img width="1000" height="563" alt="image" src="https://github.com/user-attachments/assets/7d14098b-fee3-4449-836a-ab87db9be918" />
+
+
+
+
+
+So the board is now done. It works nicely! It is based on the [last one I made](github.com/asmund20/keyboard_journey).
 
 It has a six by three main matrix and three thumb keys. It only supports Choc v2
 switches.
@@ -7,9 +13,9 @@ switches.
 ## Building
 You can build it yourself, but check the license first (no guarantee that it
 will work). Note that it might not be obvious what parts are needed, so please
-ask. For help, you can create an issue here.
+ask. For help, you can create an issue.
 
-The file for the pcb and case can be found in the releases page.
+The file for the PCB and case can be found in the releases page.
 
 ## Clone
 To include the footprints from [ceoloide/ergogen-footprints](https://github.com/ceoloide/ergogen-footprints/tree/603afdc17dda267d4daffe45121c907b77b4d2de), clone with
